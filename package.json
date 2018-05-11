@@ -1,0 +1,20 @@
+{
+  "name": "com.axciteusapp.appreleaseone",
+  "version": "1.0.0",
+  "displayName": "exciteus",
+  "cordova": {
+    "platforms": [
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-statusbar": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "~7.0.0",
+    "cordova-ios": "^4.5.4",
+    "cordova-plugin-whitelist": "1"
+  }
+}
