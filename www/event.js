@@ -12,7 +12,7 @@ $(document).ready(function () {
         $.ajax({
             async: true,
             crossDomain: true,
-            url: "https://on-the-moment-dev.herokuapp.com/external/stories/evt-666b7be3-8010-4a58-8ead-31d995cdac2a",
+            url: "https://excite-us.herokuapp.com/external/stories/evt-666b7be3-8010-4a58-8ead-31d995cdac2a",
             processData: false,
             contentType: false,
             type: 'POST',
@@ -39,7 +39,7 @@ $(document).ready(function () {
     var id = getQueryStringValue('id');
     var htmlstring = "";
     var output = document.getElementById("events");
-    var urll = "https://on-the-moment-dev.herokuapp.com/external/events/" + id;
+    var urll = "https://excite-us.herokuapp.com/external/events/" + id;
     console.log(urll);
 
     /*
@@ -65,7 +65,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'GET',
         crossOrigin: true,
-        url: "https://on-the-moment-dev.herokuapp.com/external/events/" + id,
+        url: "https://excite-us.herokuapp.com/external/events/" + id,
 
         dataType: "json",
         success: function (data) {
@@ -456,7 +456,7 @@ $(document).ready(function () {
                 $.ajax({
                     async: true,
                     crossDomain: true,
-                    url: "https://on-the-moment-dev.herokuapp.com/external/stories/" + id ,
+                    url: "https://excite-us.herokuapp.com/external/stories/" + id ,
                     data: formDataToUpload, // Add as Data the Previously create formData
                     type: "POST",
                     contentType: false,

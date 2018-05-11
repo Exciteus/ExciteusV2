@@ -41,7 +41,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'GET',
         crossOrigin: true,
-        url: "https://on-the-moment-dev.herokuapp.com/external/events/upcoming",
+        url: "https://excite-us.herokuapp.com/external/events/upcoming",
 
         dataType: "json",
         success: function (data) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: 'GET',
                     crossOrigin: true,
-                    url: "https://on-the-moment-dev.herokuapp.com/external/events/" + element.id,
+                    url: "https://excite-us.herokuapp.com/external/events/" + element.id,
 
                     dataType: "json",
                     success: function (data) {
