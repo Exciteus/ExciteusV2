@@ -3,49 +3,41 @@
 <html lang="en">
 
 <head>
-
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <script src="jquery.min.js"></script>
+   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+
     <title>ExciteUS</title>
     <meta name="author" content="SitePoint">
-
-    <link rel="stylesheet" href="bebas-neue.css">
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
-
+      <link rel="stylesheet" href="bebas-neue.css">
     <!-- drawer.css -->
     <link rel="stylesheet" href="drawer-master/dist/css/drawer.css">
     <!-- jquery & iScroll -->
-    <script src="jquery.min.js"></script>
+    
     <script src="iscroll.min.js"></script>
     <!-- drawer.js -->
     <script src="drawer-master/dist/js/drawer.js"></script>
 
 
-    <script src="event.js" type="application/javascript"></script>
-    <link rel="stylesheet" href="event.css">
-
-
+    <script src="overview.js" type="application/javascript"></script>
     <!-- Google material design icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+    <link rel="stylesheet" href="overview.css">
+
+    
 </head>
 
-<body id="body" class="drawer drawer--right image-overlay js">
+<body class="drawer drawer--right js">
+    <!-- preloader!-->
     <div id="preloader"></div>
-
-    <img onclick="gohome()" id="back-arrow" class="noSelect" src="img/back-arrow.svg">
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <span class="close">&times;</span>
-        <div class="modal-content" id="modelinside">
-
-        </div>
+      <!-- preloader!-->
+    <div class="header" id="myHeader">
 
     </div>
     <header role="banner">
@@ -60,34 +52,26 @@
                 <li><a class="drawer-menu-item" href="overview.html">Overview</a></li>
                 <li><a class="drawer-menu-item" href="about-the-platform.html">About the platform</a></li>
                 <li><a class="drawer-menu-item" href="about-us.html">terms of service</a></li>
-
             </ul>
         </nav>
     </header>
     <main>
 
-        <h1>Details</h1>
+        <h1>OVERVIEW</h1>
 
-        <div id="events">
-        </div>
+        <div>
+            <div>
+               <h5>Latest pictures based on your location</h5>
+                <div class='photocontainer'> </div>
+                </div>
+            <div>
+                <h5 class='inline-block'>Events</h5>
 
-        <form id="testform" method="post">
-            <input id="testinput" name="myFile" type="file">
-            <input type="submit" value="Submit">
-        </form>
-
-        <!-- file upload testcode! -->
-        <form id="myAwesomeForm" method="post" action="https://on-the-moment-dev.herokuapp.com/external/stories/evt-2ebd0e70-e55a-4131-8c4b-500440bfd367">
-            <input type="text" id="filename" name="filename" />
-            <!-- Filename -->
-            <input type="submit" id="submitButton" name="submitButton" />
-            <!-- Submit -->
-        </form>
-        <!-- file upload testcode! -->
-        <script type="text/javascript" src="cordova.js"></script>
+        <section id="events">
 
 
-    </main>
+        </section>
+   
 </body>
 
 </html>

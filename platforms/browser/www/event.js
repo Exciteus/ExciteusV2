@@ -63,7 +63,7 @@ $(document).ready(function () {
     }
 
     function gohome() {
-        location.href = "index.html"
+        location.href = "overview.html"
     }
 
 
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 $('#preloader').fadeOut('slow', function () {
                     $(this).remove();
                     $('#back-arrow').click(function () {
-                        window.location.href = 'index.html';
+                        window.location.href = 'overview.html';
                     });
                 });
             }, 0);
@@ -434,7 +434,7 @@ $(document).ready(function () {
 */
 
     function gohome() {
-        location.href = "index.html"
+        location.href = "overview.html"
     }
     let app = {
         init: function () {
