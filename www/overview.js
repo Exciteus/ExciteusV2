@@ -1,8 +1,7 @@
 $(document).ready(function () {
+
+
     $('.drawer').drawer();
-    
-<<<<<<< HEAD
-    
 
 
 
@@ -34,15 +33,16 @@ $(document).ready(function () {
 
 
     console.log("request");
-    var htmlstring = "";
-    var output = document.getElementById("events");
+    let htmlstring = "";
+    let output = document.getElementById("events");
+    let container = document.getElementById("photocontainer");
     let max = 0;
     let recentPicsString ="";
     /* get data with json */
     $.ajax({
         type: 'GET',
         crossOrigin: true,
-        url: "https://excite-us.herokuapp.com/external/events/upcoming",
+        url: "https://on-the-moment-dev.herokuapp.com/external/events/upcoming",
 
         dataType: "json",
         success: function (data) {
@@ -53,7 +53,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: 'GET',
                     crossOrigin: true,
-                    url: "https://excite-us.herokuapp.com/external/events/" + element.id,
+                    url: "https://on-the-moment-dev.herokuapp.com/external/events/" + element.id,
 
                     dataType: "json",
                     success: function (data) {
@@ -90,17 +90,14 @@ $(document).ready(function () {
                         htmlstring += nextstring;
                         output.innerHTML = htmlstring;
 
+
                         $('.event-card').click(function () {
                             var myid = $(this).attr("id");
                             window.location.href = 'event.html?id=' + myid;
 
                         });
-
-
-/* code voor die images boven
-                        let container = document.getElementById("photo-container");
-
-                        if (data.stories.length > 0 && max < 7) {
+/*
+                        if (data.stories != null && data.stories.length > 0 && max < 7) {
                             for (let x = 0; x < data.stories.length; x++)
                             {
                                 if (max < 7) {
@@ -108,23 +105,19 @@ $(document).ready(function () {
                                 }
                             }
                         }
-                        container.innerHTML = recentPicsString;*/
+                        container.innerHTML = recentPicsString;
+*/
+
                     }
                 });
 
             });
-
-
-
 
             setTimeout(function () {
                 $('#preloader').fadeOut('slow', function () {
                     $(this).remove();
                 });
             }, 500);
-
-
-
 
             let intDuration = 5000;
             setInterval(
@@ -191,7 +184,3 @@ $(document).ready(function () {
     }
 
 });
-=======
-
-});
->>>>>>> origin/master

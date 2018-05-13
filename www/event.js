@@ -56,7 +56,7 @@ $(document).ready(function () {
     }
 
     function gohome() {
-        location.href = "index.html"
+        location.href = "overview.html"
     }
 
 
@@ -70,27 +70,42 @@ $(document).ready(function () {
         dataType: "json",
         success: function (data) {
 
-            let storieString ="";
-            for (let b = 0; b < data.stories.length; b++) {
-                if (b === 0) {
-                    storieString = storieString + "<img class='photo-list' style='margin-left: 0px' src=" + data.stories[b] + " />"
-                } else {
-                    storieString = storieString + "<img class='photo-list' src=" + data.stories[b] + " />"
-                }
-            }
-
+            let storyString ="";
+            let promoString="";
+            let iconString = "";
             let moreInfo ="";
 
-            if (data.detailLink !=null){
-                moreInfo = "<p style='margin-top: 15px'><a class='link' href=" + data.detailLink + ">More info...</a></p>"
+            if (data.detailLink !=null && data.detailLink !== ""){
+                moreInfo = "<p style='margin-top: 15px'><a class='link' href=" + data.detailLink + ">More info...</a></p>";
             }
 
-            if (data.stories.length > 0 && data.promotion != null && data.promotion !== "") {
+            if (data.stories.length > 0) {
                 storiesAvailable = true;
+                iconString = "<img class='icon stories' src= '" + data.icon + "'/>";
+                storyString = " <h5>Pictures</h5> <div class='photo-container'>";
+
+                for (let b = 0; b < data.stories.length; b++) {
+                    if (b === 0) {
+                        storyString = storyString + "<img class='photo-list' style='margin-left: 0px' src=" + data.stories[b] + " />";
+                    } else {
+                        storyString = storyString + "<img class='photo-list' src=" + data.stories[b] + " />";
+                    }
+                }
+                storyString = storyString + "</div>";
+
+            } else {
+                storiesAvailable = false;
+                iconString = "<img class='icon' src= '" + data.icon + "'/>";
+            }
+
+
+            if (data.promotion != null && data.promotion !== "") {
+                 promoString = "<h4 class='promo' style='padding-top: 10px'> " + data.promotion.name + "</h4> <hr>";
+            }
 
                 nextstring = " <div>" +
                     "            <div>" +
-                    "                <img class='icon stories' src= '" + data.icon + "'/>" +
+                    iconString +
                     "                <div class='inline-block main-info'>" +
                     "                    <h3 class='title-event'>" + data.title + "</h3>" +
                     "                    <h4 class='inline-block'>@" + data.place.name + "</h4>" +
@@ -104,106 +119,14 @@ $(document).ready(function () {
                     "                <h5 style='margin-bottom: 8px'>DESCRIPTION</h5>" +
                     "<h4><i class='material-icons icon-small'>date_range</i> WHEN  &nbsp&nbsp&nbsp" + OnlyDateConverter(data.startTime) + "</h4>" +
                     "<h4><i class='material-icons icon-small'>access_time</i> START &nbsp&nbsp " + OnlyTimeConverter(data.startTime) + "</h4>" +
-                    "<h4 class='promo' style='padding-top: 10px'> " + data.promotion.name + "</h4> <hr><section class='description-twoo'><p>" + data.description + "</p>" +
-                    "            </div>" +
-                    "            <div>" +
-                    "                <h5>Pictures</h5>"+
-
-                    "   <div class='photo-container'>" +
-                    storieString +
-                    " </div>   " +
+                    promoString + "<section class='description-twoo'><p>" + data.description + "</p>" +
+                    storyString  +
                     moreInfo +
                      "                </div>" +
                     "            </div>" +
-                    "        </div>"
-                    fillPics(data);
-                var story_url_load_array = data.stories;
-            } else if (data.stories.length > 0 && data.promotion == null || data.promotion === "") {
+                    "        </div>";
 
-                storiesAvailable = true;
-                nextstring = "<div>" +
-                "            <div>" +
-                "                <img class='icon stories' src= '" + data.icon + "'/>" +
-                "                <div class='inline-block main-info'>" +
-                "                    <h3 class='title-event'>" + data.title + "</h3>" +
-                "                    <h4 class='inline-block'>@" + data.place.name + "</h4>" +
-                "                    <h4>" + data.place.address + "</h4>" +
-                "                </div>" +
-                "            </div>" +
-                "            <div id='addstory'>" +
-                "                <h7>CHECK-IN</h7>" +
-                "            </div>" +
-                "            <div>" +
-                "                <h5 style='margin-bottom: 8px'>DESCRIPTION</h5>" +
-                "<h4><i class='material-icons icon-small'>date_range</i> WHEN  &nbsp&nbsp&nbsp" + OnlyDateConverter(data.startTime) + "</h4>" +
-                "<h4 style=''><i class='material-icons icon-small'>access_time</i> START &nbsp&nbsp " + OnlyTimeConverter(data.startTime) + "</h4>" +
-                "<section class='description-twoo'><p>" + data.description + "</p>" +
-                "            </div>" +
-                "            <div>" +
-                "                <h5>Pictures</h5>"+
-
-                "<div class='photo-container'>" +
-                    storieString +
-                   " </div>   " +
-
-                moreInfo +
-                "                </div>" +
-                "            </div>" +
-                "        </div>"
-                fillPics(data);
-            } else  if (data.promotion != null && data.promotion !== ""){
-
-                storiesAvailable = false;
-                nextstring = "<div>" +
-                    "            <div>" +
-                    "                <img class='icon' src= '" + data.icon + "'/>" +
-                    "                <div class='inline-block main-info'>" +
-                    "                    <h3 class='title-event'>" + data.title + "</h3>" +
-                    "                    <h4 class='inline-block'>@" + data.place.name + "</h4>" +
-                    "                    <h4>" + data.place.address + "</h4>" +
-                    "                </div>" +
-                    "            </div>" +
-                    "            <div id='addstory'>" +
-                    "                <h7>CHECK-IN</h7>" +
-                    "            </div>" +
-                    "            <div>" +
-                    "                <h5 style='margin-bottom: 8px'>DESCRIPTION</h5>" +
-                    "<h4><i class='material-icons icon-small'>date_range</i> WHEN  &nbsp&nbsp&nbsp" + OnlyDateConverter(data.startTime) + "</h4>" +
-                    "<h4 style=''><i class='material-icons icon-small'>access_time</i> START &nbsp&nbsp " + OnlyTimeConverter(data.startTime) + "</h4>" +
-                    "<h4 class='promo' style='padding-top: 10px'> " + data.promotion.name + "</h4> <hr><section class='description-twoo'><p>" + data.description + "</p>" +
-                    "            </div>" +
-                    "            <div>" +
-                    moreInfo +
-                "                </div>" +
-                "            </div>" +
-                "        </div>"
-
-            } else {
-                storiesAvailable = false;
-                nextstring = "<div>" +
-                    "            <div>" +
-                    "                <img class='icon' src= '" + data.icon + "'/>" +
-                    "                <div class='inline-block main-info'>" +
-                    "                    <h3 class='title-event'>" + data.title + "</h3>" +
-                    "                    <h4 class='inline-block'>@" + data.place.name + "</h4>" +
-                    "                    <h4>" + data.place.address + "</h4>" +
-                    "                </div>" +
-                    "            </div>" +
-                    "            <div id='addstory'>" +
-                    "                <h7>CHECK-IN</h7>" +
-                    "            </div>" +
-                    "            <div>" +
-                    "                <h5 style='margin-bottom: 8px'>DESCRIPTION</h5>" +
-                    "<h4><i class='material-icons icon-small'>date_range</i> WHEN  &nbsp&nbsp&nbsp" + OnlyDateConverter(data.startTime) + "</h4>" +
-                    "<h4 style=''><i class='material-icons icon-small'>access_time</i> START &nbsp " + OnlyTimeConverter(data.startTime) + "</h4>" +
-                    "<section class='description-twoo'><p>" + data.description + "</p>" +
-                    "            </div>" +
-                    "            <div>" +
-                    moreInfo +
-                "                </div>" +
-                "            </div>" +
-                "        </div>"
-            }
+            var story_url_load_array = data.stories;
 
             htmlstring += nextstring;
             output.innerHTML = htmlstring;
@@ -212,7 +135,7 @@ $(document).ready(function () {
                 $('#preloader').fadeOut('slow', function () {
                     $(this).remove();
                     $('#back-arrow').click(function () {
-                        window.location.href = 'index.html';
+                        window.location.href = 'overview.html';
                     });
                 });
             }, 0);
@@ -378,12 +301,14 @@ $(document).ready(function () {
     }
 
     function gohome() {
-        location.href = "index.html"
+        location.href = "overview.html"
     }
 
     let app = {
         init: function () {
-            document.getElementById('addstory').addEventListener('click', app.takephoto);
+            $("#addstory").click(function () {
+                app.takephoto();
+            })
         },
 
         takephoto: function () {
@@ -392,9 +317,6 @@ $(document).ready(function () {
                 x: 0,
                 y: 0,
                 width: window.screen.width,
-
-
-
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 mediaType: Camera.MediaType.PICTURE,
@@ -403,9 +325,6 @@ $(document).ready(function () {
                 mediaType: Camera.MediaType.ALLMEDIA,
                 targetWidth: 1080,
                 targetHeight: 1920,
-
-
-
             };
 
             navigator.camera.getPicture(app.ftw, app.wtf, opts);
@@ -417,22 +336,16 @@ $(document).ready(function () {
 
             var htmloutput = '<div id="confirm-image"><div id="send-image"><h7>Send image to event storys</h7></div><img id="story-image" src="data:image/jpeg;base64,' + imageData + '"></div>';
             $('body').prepend(htmloutput);
-
-
             setTimeout(function () {
                 $('#preloader').fadeOut('slow', function () {
                     $(this).remove();
                 });
             }, 500);
 
-
-
-
+            document.addEventListener('deviceready', app.init);
 
             $('#confirm-image').click(function () {
                 $('#send-image h7').html('Sending data...');
-                
-
 
                 // Get the form element withot jQuery
                 var form = document.getElementById("myAwesomeForm");
@@ -452,7 +365,6 @@ $(document).ready(function () {
                 var formDataToUpload = new FormData(form);
                 formDataToUpload.append("file", blob);
 
-
                 $.ajax({
                     async: true,
                     crossDomain: true,
@@ -469,9 +381,10 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log(data);
                         console.log("succesfull image sended");
-                        
-                        
+
+
                         $('#confirm-image').remove();
+                        window.location.reload(true);
                     },
                     complete: function () {
                         console.log("Request finished.");
@@ -479,8 +392,6 @@ $(document).ready(function () {
                 });
 
                 /* test */
-
-
 
                 function b64toBlob(b64Data, contentType, sliceSize) {
                     contentType = contentType || '';
@@ -509,14 +420,6 @@ $(document).ready(function () {
                 }
 
             });
-
-
-
-
-
-
-
-
         },
         wtf: function (msg) {
             document.getElementById('msg').textContent = msg;
@@ -546,14 +449,6 @@ $(document).ready(function () {
             type: mimeString
         });
     }
-
-    function fillPics(x) {
-        for (let i = 0; i > x.stories.length; x++){
-            let inner = "<img class='photo-list' src='img/party-square.jfif' />+";
-            document.getElementById("photo-container").innerHTML = inner;
-        }
-    }
-
 
     document.addEventListener('deviceready', app.init);
 
